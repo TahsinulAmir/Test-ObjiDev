@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+    <title>Dashboard</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -75,6 +75,47 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('/') }}assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @stack('myscript')
+
+    <script>
+        $('#prosesLogout').on('click', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ url('prosesLogout') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    Swal.fire({
+                        title: "Logout?",
+                        text: "Yakin, ingin logout!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, logout!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/';
+                        }
+                    });
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Login Gagal',
+                        icon: 'error',
+                        confirmButtonText: 'Oke'
+                    })
+                }
+            });
+        });
+    </script>
 
 </body>
 
