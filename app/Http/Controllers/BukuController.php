@@ -30,7 +30,6 @@ class BukuController extends Controller
             'all_penerbit' => PenerbitModel::all()
         ];
 
-        // dd($data['all_penulis']);
         return view('buku.v_daftar_buku', $data);
     }
 
@@ -39,9 +38,9 @@ class BukuController extends Controller
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $nama_file = "cover_" . time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('image/cover');
 
-            // Simpan gambar ke storage
-            $file->storeAs('public/assets/cover', $nama_file);
+            $file->move($path, $nama_file);
         } else {
             $nama_file = null;
         }
@@ -61,5 +60,57 @@ class BukuController extends Controller
             'data' => $data,
             'iteration' => BukuModel::count()
         ]);
+    }
+
+    public function editBuku($id)
+    {
+        $all_penulis = User::where('role', 'penulis')
+            ->select('id', 'name')
+            ->get();
+
+        $data = [
+            'title' => 'Edit Buku',
+            'detailBuku' => BukuModel::find($id),
+            'all_penulis' => $all_penulis,
+            'all_kategori' => KategoriModel::all(),
+            'all_penerbit' => PenerbitModel::all()
+        ];
+        // dd($data['detailBuku']);
+
+        return view('buku.v_detail_buku', $data);
+    }
+
+    public function updateBuku(Request $request, $id)
+    {
+        $detailBuku = BukuModel::find($id);
+        $cover = $detailBuku->cover;
+
+        if ($request->hasFile('cover')) {
+            if ($cover) {
+                $path = public_path('image/cover/' . $cover);
+                unlink($path);
+            }
+
+            $file = $request->file('cover');
+            $nama_file = "cover_" . time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('image/cover');
+
+            $file->move($path, $nama_file);
+        } else {
+            $nama_file = null;
+        }
+
+        $detailBuku->judul_buku = $request->judul_buku;
+        $detailBuku->penulis_id = $request->penulis_id;
+        $detailBuku->penerbit_id = $request->penerbit_id;
+        $detailBuku->kategori_id = $request->kategori_id;
+        $detailBuku->thn_terbit = $request->thn_terbit;
+        $detailBuku->judul_buku = $request->judul_buku;
+        $detailBuku->deskripsi = $request->deskripsi;
+        $detailBuku->cover = $nama_file;
+
+        $detailBuku->save();
+
+        return response()->json(['message' => 'Success']);
     }
 }

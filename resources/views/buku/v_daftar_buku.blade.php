@@ -49,8 +49,8 @@
                                     <td>{{ $buku->kategori }}</td>
                                     <td>{{ $buku->thn_terbit }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success"><i
-                                                class="bi bi-pencil-square"></i></button>
+                                        <a href="{{ url('/buku/' . $buku->id) }}" class="btn btn-success"><i
+                                                class="bi bi-pencil-square"></i></a>
                                         <button type="button" class="btn btn-warning"><i
                                                 class="bi bi-info-circle"></i></button>
                                         <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>

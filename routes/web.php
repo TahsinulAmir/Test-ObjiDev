@@ -16,7 +16,9 @@ Route::post('/prosesLogin', [AuthController::class, 'prosesLogin']);
 Route::post('/prosesLogout', [AuthController::class, 'prosesLogout']);
 
 Route::get('/buku', [BukuController::class, 'index']);
+Route::get('/buku/{id}', [BukuController::class, 'editBuku']);
 Route::post('/tambah-buku', [BukuController::class, 'tambahBuku']);
+Route::post('/buku/{id}', [BukuController::class, 'updateBuku']);
 
 
 Route::get('/dashboard', function () {
