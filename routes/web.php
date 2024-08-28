@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PenerbitController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +30,16 @@ Route::get('/laporan', [BukuController::class, 'laporan']);
 Route::post('/laporan', [BukuController::class, 'getLaporan']);
 
 Route::get('/my-buku', [BukuController::class, 'bukuSaya']);
+
+Route::get('/penerbit', [PenerbitController::class, 'index']);
+Route::get('/penerbit/{id}', [PenerbitController::class, 'detailPenerbit']);
+Route::get('/update-penerbit/{id}', [PenerbitController::class, 'updatePenerbit']);
+Route::post('/update-penerbit/{id}', [PenerbitController::class, 'editPenerbit']);
+Route::post('/penerbit', [PenerbitController::class, 'tambahPenerbit']);
+Route::post('/hapus/{id}', [PenerbitController::class, 'hapusPenerbit']);
+
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/update-kategori/{id}', [KategoriController::class, 'updateKategori']);
+Route::post('/kategori', [KategoriController::class, 'tambahKategori']);
+Route::post('/update-kategori/{id}', [KategoriController::class, 'editKategori']);
+Route::post('/hapus-kategori/{id}', [KategoriController::class, 'hapusKategori']);

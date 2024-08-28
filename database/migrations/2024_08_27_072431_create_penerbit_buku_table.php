@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('alamat')->nullable();
             $table->string('no_phone')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->text('deskripsi_penerbit')->nullable();
             $table->timestamps();

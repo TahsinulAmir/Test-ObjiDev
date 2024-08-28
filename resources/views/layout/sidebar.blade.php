@@ -22,6 +22,18 @@
                     <span>Laporan Buku</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/penerbit') }}">
+                    <i class="bi bi-upload"></i>
+                    <span>Data Penerbit</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/kategori') }}">
+                    <i class="bi bi-x-diamond"></i>
+                    <span>Data Kategori</span>
+                </a>
+            </li>
         @elseif(Auth::guard('user')->user()->role === 'penulis')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ url('/my-buku') }}">
