@@ -7,15 +7,27 @@ use App\Models\KategoriModel;
 use App\Models\PenerbitModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BukuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $all_buku = BukuModel::query();
+
         $all_buku = BukuModel::join('users', 'buku.penulis_id', '=', 'users.id')
             ->join('penerbit_buku', 'buku.penerbit_id', '=', 'penerbit_buku.id')
             ->join('kategori_buku', 'buku.kategori_id', '=', 'kategori_buku.id')
             ->select('buku.*', 'users.name', 'penerbit_buku.nama', 'kategori_buku.kategori')
+            ->when($request->judul_buku, function ($query) use ($request) {
+                return $query->where('judul_buku', 'like', '%' . $request->judul_buku . '%');
+            })
+            ->when($request->penulis_id, function ($query) use ($request) {
+                return $query->where('penulis_id', $request->penulis_id);
+            })
+            ->when($request->penerbit_id, function ($query) use ($request) {
+                return $query->where('penerbit_id', $request->penerbit_id);
+            })
             ->get();
 
         $all_penulis = User::where('role', 'penulis')
@@ -119,7 +131,7 @@ class BukuController extends Controller
         $detailBuku = BukuModel::join('users', 'buku.penulis_id', '=', 'users.id')
             ->join('penerbit_buku', 'buku.penerbit_id', '=', 'penerbit_buku.id')
             ->join('kategori_buku', 'buku.kategori_id', '=', 'kategori_buku.id')
-            ->where('buku.id',$id)
+            ->where('buku.id', $id)
             ->select('buku.*', 'users.name', 'penerbit_buku.nama', 'kategori_buku.kategori')
             ->first();
         $data = [
@@ -141,5 +153,27 @@ class BukuController extends Controller
         $detailBuku->delete();
 
         return response()->json(['message' => 'Success']);
+    }
+
+    // PENULIS
+    public function bukuSaya()
+    {
+        $id_penulis = Auth::guard('user')->user()->id;
+
+        $all_buku = BukuModel::join('users', 'buku.penulis_id', '=', 'users.id')
+            ->join('penerbit_buku', 'buku.penerbit_id', '=', 'penerbit_buku.id')
+            ->join('kategori_buku', 'buku.kategori_id', '=', 'kategori_buku.id')
+            ->where('buku.penulis_id', $id_penulis)
+            ->select('buku.*', 'users.name', 'penerbit_buku.nama', 'kategori_buku.kategori')
+            ->get();
+
+        $data = [
+            'title' => 'Daftar Buku Saya',
+            'all_buku' => $all_buku,
+        ];
+
+        // dd($all_buku);
+
+        return view('buku.v_buku_saya', $data);
     }
 }

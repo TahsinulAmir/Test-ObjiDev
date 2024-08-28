@@ -16,14 +16,37 @@
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    <div class="col d-flex gap-4">
+                    <div class="col d-flex my-2">
                         <div>
-                            <h5 class="card-title">{{ $title }}</h5>
+                            <h5 class="card-title"></h5>
                         </div>
-                        <div class="my-auto">
+                        <div class="my-auto me-auto">
                             <button type="button " class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#tambahBuku">Tambah Buku</button>
                         </div>
+                        <form action="/buku" method="GET" id="search">
+                            <div class="d-flex ms-auto gap-1 align-items-center">
+                                <input type="text" class="form-control" name="judul_buku" placeholder="Judul Buku"
+                                    value="{{ isset($_GET['judul_buku']) ? $_GET['judul_buku'] : '' }}">
+                                <select name="penulis_id" class="form-select">
+                                    <option selected disabled>Penulis</option>
+                                    @foreach ($all_penulis as $penulis)
+                                        <option value="{{ $penulis->id }}"
+                                            {{ isset($_GET['penulis_id']) && $_GET['penulis_id'] == $penulis->id ? 'selected' : '' }}>
+                                            {{ $penulis->name }}</option>
+                                    @endforeach
+                                </select>
+                                <select name="penerbit_id" class="form-select">
+                                    <option selected disabled>Penerbit</option>
+                                    @foreach ($all_penerbit as $penerbit)
+                                        <option value="{{ $penerbit->id }}"
+                                            {{ isset($_GET['penerbit_id']) && $_GET['penerbit_id'] == $penerbit->id ? 'selected' : '' }}>
+                                            {{ $penerbit->nama }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-secondary">Cari</button>
+                            </div>
+                        </form>
                     </div>
 
                     <!-- Table with stripped rows -->
@@ -51,8 +74,8 @@
                                     <td>
                                         <a href="{{ url('/buku/' . $buku->id) }}" class="btn btn-success"><i
                                                 class="bi bi-pencil-square"></i></a>
-                                        <button type="button" class="btn btn-warning modalDetailBuku" data-id="{{ $buku->id }}"><i
-                                                class="bi bi-info-circle"></i></button>
+                                        <button type="button" class="btn btn-warning modalDetailBuku"
+                                            data-id="{{ $buku->id }}"><i class="bi bi-info-circle"></i></button>
                                         <button type="button" data-id="{{ $buku->id }}"
                                             class="btn btn-danger deleteBtn"><i class="bi bi-trash"></i></button>
                                     </td>
