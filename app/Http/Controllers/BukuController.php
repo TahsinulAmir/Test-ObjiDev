@@ -87,7 +87,6 @@ class BukuController extends Controller
             'all_kategori' => KategoriModel::all(),
             'all_penerbit' => PenerbitModel::all()
         ];
-        // dd($data['detailBuku']);
 
         return view('buku.v_detail_buku', $data);
     }
@@ -155,6 +154,48 @@ class BukuController extends Controller
         return response()->json(['message' => 'Success']);
     }
 
+    public function laporan()
+    {
+        $all_penulis = User::where('role', 'penulis')
+            ->select('id', 'name')
+            ->get();
+
+        $data = [
+            'title' => 'Laporan',
+            'all_penulis' => $all_penulis,
+            'all_kategori' => KategoriModel::all(),
+            'all_penerbit' => PenerbitModel::all()
+        ];
+
+        return view('buku.v_laporan', $data);
+    }
+
+    public function getLaporan(Request $request)
+    {
+        $getBuku = BukuModel::query();
+
+        $getBuku = BukuModel::join('users', 'buku.penulis_id', '=', 'users.id')
+            ->join('penerbit_buku', 'buku.penerbit_id', '=', 'penerbit_buku.id')
+            ->join('kategori_buku', 'buku.kategori_id', '=', 'kategori_buku.id')
+            ->select('buku.*', 'users.name', 'penerbit_buku.nama', 'kategori_buku.kategori')
+            ->when($request->penulis_id, function ($query) use ($request) {
+                return $query->where('penulis_id', $request->penulis_id);
+            })
+            ->when($request->penerbit_id, function ($query) use ($request) {
+                return $query->where('penerbit_id', $request->penerbit_id);
+            })
+            ->when($request->kategori_id, function ($query) use ($request) {
+                return $query->where('kategori_id', $request->kategori_id);
+            })
+            ->get();
+
+        $data = [
+            'getBuku' => $getBuku,
+        ];
+
+        return view('buku.getBuku', $data);
+    }
+
     // PENULIS
     public function bukuSaya()
     {
@@ -171,8 +212,6 @@ class BukuController extends Controller
             'title' => 'Daftar Buku Saya',
             'all_buku' => $all_buku,
         ];
-
-        // dd($all_buku);
 
         return view('buku.v_buku_saya', $data);
     }

@@ -24,5 +24,7 @@ Route::get('/modal-detail-buku/{id}', [BukuController::class, 'detailBuku']);
 Route::post('/tambah-buku', [BukuController::class, 'tambahBuku']);
 Route::post('/buku/{id}', [BukuController::class, 'updateBuku']);
 Route::post('/hapus/{id}', [BukuController::class, 'hapusBuku']);
+Route::get('/laporan', [BukuController::class, 'laporan']);
+Route::post('/laporan', [BukuController::class, 'getLaporan']);
 
 Route::get('/my-buku', [BukuController::class, 'bukuSaya']);

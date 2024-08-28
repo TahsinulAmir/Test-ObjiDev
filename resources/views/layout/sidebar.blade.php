@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/buku') }}">
+                <a class="nav-link collapsed" href="{{ url('/laporan') }}">
                     <i class="bi bi-file-earmark-check"></i>
                     <span>Laporan Buku</span>
                 </a>
