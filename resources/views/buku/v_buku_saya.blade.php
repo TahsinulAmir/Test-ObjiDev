@@ -23,6 +23,7 @@
                                 <th scope="col">Penerbit</th>
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Tahun Terbit</th>
+                                <th scope="col">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,7 @@
                                     <td>{{ $buku->nama }}</td>
                                     <td>{{ $buku->kategori }}</td>
                                     <td>{{ $buku->thn_terbit }}</td>
+                                    <td>{{ $buku->jumlah }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('penerbit_id')->constrained('penerbit_buku')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('kategori_id')->constrained('kategori_buku')->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('thn_terbit')->nullable();
+            $table->integer('jumlah')->nullable();
             $table->text('deskripsi')->nullable();
             $table->string('cover')->nullable();
             $table->timestamps();

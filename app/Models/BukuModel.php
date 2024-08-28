@@ -11,5 +11,5 @@ class BukuModel extends Model
 
     protected $table = 'buku';
     protected $primaryKey = 'id';
-    protected $fillable = ['judul_buku', 'penulis_id', 'penerbit_id', 'kategori_id', 'thn_terbit', 'deskripsi', 'cover'];
+    protected $fillable = ['judul_buku', 'penulis_id', 'penerbit_id', 'kategori_id', 'thn_terbit','jumlah', 'deskripsi', 'cover'];
 }

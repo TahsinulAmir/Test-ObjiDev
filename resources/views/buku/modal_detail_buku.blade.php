@@ -44,6 +44,11 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Jumlah</div>
+                                    <div class="col-lg-9 col-md-8">: {{ $detailBuku->jumlah }}</div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Deskripsi</div>
                                     <div class="col-lg-9 col-md-8">: {{ $detailBuku->deskripsi }}</div>
                                 </div>

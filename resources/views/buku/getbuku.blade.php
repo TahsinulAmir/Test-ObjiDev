@@ -6,6 +6,6 @@
         <td>{{ $buku->nama }}</td>
         <td>{{ $buku->kategori }}</td>
         <td>{{ $buku->thn_terbit }}</td>
-        <td>9</td>
+        <td>{{ $buku->jumlah }}</td>
     </tr>
 @endforeach

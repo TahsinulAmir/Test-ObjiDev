@@ -31,6 +31,15 @@ class UserSeeder extends Seeder
                 'role' => 'penulis',
                 'alamat' => 'Semarang',
                 'password' => 'amir123',
+            ],
+            [
+                'name' => 'Tahsinul',
+                'email' => 'tahsinul@gmail.com',
+                'no_phone' => '0123435564',
+                'gender' => 'L',
+                'role' => 'penulis',
+                'alamat' => 'Surabaya',
+                'password' => 'tahsinul123',
             ]
         ];
 

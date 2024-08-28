@@ -63,6 +63,7 @@ class BukuController extends Controller
             'penerbit_id' => $request->penerbit_id,
             'kategori_id' => $request->kategori_id,
             'thn_terbit' => $request->thn_terbit,
+            'jumlah' => $request->jumlah,
             'deskripsi' => $request->deskripsi,
             'cover' => $nama_file,
         ]);
@@ -117,6 +118,7 @@ class BukuController extends Controller
         $detailBuku->kategori_id = $request->kategori_id;
         $detailBuku->thn_terbit = $request->thn_terbit;
         $detailBuku->judul_buku = $request->judul_buku;
+        $detailBuku->jumlah = $request->jumlah;
         $detailBuku->deskripsi = $request->deskripsi;
         $detailBuku->cover = $nama_file;
 
@@ -187,6 +189,7 @@ class BukuController extends Controller
             ->when($request->kategori_id, function ($query) use ($request) {
                 return $query->where('kategori_id', $request->kategori_id);
             })
+            ->orderBy('jumlah', 'asc')
             ->get();
 
         $data = [

@@ -40,6 +40,8 @@ class PenerbitSeeder extends Seeder
                 'alamat' => $value['alamat'],
                 'no_phone' => $value['no_phone'],
                 'email' => $value['email'],
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

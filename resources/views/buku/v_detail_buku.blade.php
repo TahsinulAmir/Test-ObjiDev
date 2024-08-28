@@ -71,6 +71,11 @@
                                         <input type="number" class="form-control" id="thn_terbit" placeholder="2002"
                                             value="{{ $detailBuku['thn_terbit'] }}">
                                     </div>
+                                    <div class="col-6">
+                                        <label for="inputAddress2" class="form-label">Jumlah</label>
+                                        <input type="number" class="form-control" id="jumlah" placeholder="2"
+                                            value="{{ $detailBuku['jumlah'] }}">
+                                    </div>
                                     <div class="col-md-12">
                                         <label for="deskripsi" class="form-label">Deskripsi</label>
                                         <textarea class="form-control" placeholder="Detail Buku" id="deskripsi" style="height: 100px;">{{ $detailBuku['deskripsi'] }}</textarea>
@@ -101,6 +106,7 @@
                 formData.append('penerbit_id', $('#penerbit_id').val());
                 formData.append('kategori_id', $('#kategori_id').val());
                 formData.append('thn_terbit', $('#thn_terbit').val());
+                formData.append('jumlah', $('#jumlah').val());
                 formData.append('deskripsi', $('#deskripsi').val());
                 formData.append('cover', cover);
 

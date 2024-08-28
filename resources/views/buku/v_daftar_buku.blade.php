@@ -52,6 +52,7 @@
                                 <th scope="col">Penerbit</th>
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Tahun Terbit</th>
+                                <th scope="col">Jumlah</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -64,6 +65,7 @@
                                     <td>{{ $buku->nama }}</td>
                                     <td>{{ $buku->kategori }}</td>
                                     <td>{{ $buku->thn_terbit }}</td>
+                                    <td>{{ $buku->jumlah }}</td>
                                     <td>
                                         <a href="{{ url('/buku/' . $buku->id) }}" class="btn btn-success"><i
                                                 class="bi bi-pencil-square"></i></a>
@@ -129,6 +131,10 @@
                                 <label for="inputPassword5" class="form-label">Tahun Terbit</label>
                                 <input type="number" class="form-control" placeholder="2020" id="thn_terbit">
                             </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword5" class="form-label">Jumlah</label>
+                                <input type="number" class="form-control" placeholder="2" id="jumlah">
+                            </div>
                             <div class="col-12">
                                 <label for="inputAddress5" class="form-label">Deskripsi</label>
                                 <textarea class="form-control" placeholder="Detail Buku" id="deskripsi" style="height: 100px;"></textarea>
@@ -163,6 +169,7 @@
                 formData.append('penerbit_id', $('#penerbit_id').val());
                 formData.append('kategori_id', $('#kategori_id').val());
                 formData.append('thn_terbit', $('#thn_terbit').val());
+                formData.append('jumlah', $('#jumlah').val());
                 formData.append('deskripsi', $('#deskripsi').val());
                 formData.append('cover', cover);
 

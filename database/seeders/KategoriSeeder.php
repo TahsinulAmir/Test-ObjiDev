@@ -29,6 +29,8 @@ class KategoriSeeder extends Seeder
         foreach ($data as $key => $value) {
             DB::table('kategori_buku')->insert([
                 'kategori' => $value['kategori'],
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

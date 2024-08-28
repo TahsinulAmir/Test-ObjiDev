@@ -16,10 +16,11 @@ class BukuSeeder extends Seeder
         $data = [
             [
                 'judul_buku' => 'Malin Kundang',
-                'penulis_id' => '2',
+                'penulis_id' => '3',
                 'penerbit_id' => '2',
                 'kategori_id' => '1',
                 'thn_terbit' => '2000',
+                'jumlah' => '4',
                 'deskripsi' => 'Ini buku malin kundang',
             ],
             [
@@ -28,7 +29,17 @@ class BukuSeeder extends Seeder
                 'penerbit_id' => '1',
                 'kategori_id' => '3',
                 'thn_terbit' => '2010',
+                'jumlah' => '3',
                 'deskripsi' => 'Ini buku perjuangan pahlawan',
+            ],
+            [
+                'judul_buku' => 'Sang Pahlawan',
+                'penulis_id' => '3',
+                'penerbit_id' => '1',
+                'kategori_id' => '3',
+                'thn_terbit' => '2010',
+                'jumlah' => '6',
+                'deskripsi' => 'Ini buku sang pahlawan',
             ],
             [
                 'judul_buku' => 'Mencari Nemo',
@@ -36,6 +47,7 @@ class BukuSeeder extends Seeder
                 'penerbit_id' => '2',
                 'kategori_id' => '2',
                 'thn_terbit' => '2003',
+                'jumlah' => '19',
                 'deskripsi' => 'Ini buku mencari nemo',
             ],
             [
@@ -44,6 +56,7 @@ class BukuSeeder extends Seeder
                 'penerbit_id' => '3',
                 'kategori_id' => '2',
                 'thn_terbit' => '1999',
+                'jumlah' => '6',
                 'deskripsi' => 'Ini buku jas merah',
             ],
         ];
@@ -55,7 +68,10 @@ class BukuSeeder extends Seeder
                 'penerbit_id' => $value['penerbit_id'],
                 'kategori_id' => $value['kategori_id'],
                 'thn_terbit' => $value['thn_terbit'],
+                'jumlah' => $value['jumlah'],
                 'deskripsi' => $value['deskripsi'],
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
