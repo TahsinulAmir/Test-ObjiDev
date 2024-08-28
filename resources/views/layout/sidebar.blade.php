@@ -29,7 +29,7 @@
         </li><!-- End Components Nav -->
         @if (Auth::guard('user')->user()->role === 'admin')
             <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link collapsed" href="{{ url('/buku') }}">
                 <i class="bi bi-grid"></i>
                 <span>Daftar Buku</span>
             </a>

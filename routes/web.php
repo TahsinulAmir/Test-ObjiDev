@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BukuController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,9 @@ Route::get('/', function () {
 
 Route::post('/prosesLogin', [AuthController::class, 'prosesLogin']);
 Route::post('/prosesLogout', [AuthController::class, 'prosesLogout']);
+
+Route::get('/buku', [BukuController::class, 'index']);
+Route::post('/tambah-buku', [BukuController::class, 'tambahBuku']);
 
 
 Route::get('/dashboard', function () {
