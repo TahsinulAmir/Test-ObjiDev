@@ -51,9 +51,10 @@
                                     <td>
                                         <a href="{{ url('/buku/' . $buku->id) }}" class="btn btn-success"><i
                                                 class="bi bi-pencil-square"></i></a>
-                                        <button type="button" class="btn btn-warning"><i
+                                        <button type="button" class="btn btn-warning modalDetailBuku" data-id="{{ $buku->id }}"><i
                                                 class="bi bi-info-circle"></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                        <button type="button" data-id="{{ $buku->id }}"
+                                            class="btn btn-danger deleteBtn"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -131,6 +132,9 @@
         </div>
     </div>
 
+    {{-- Modal Detail --}}
+    <div id="modalDetailBuku"></div>
+
     @push('myscript')
         <script>
             $('#tambahBuku').on('submit', function(e) {
@@ -166,26 +170,6 @@
                                 window.location.reload();
                             }
                         });
-
-                        //     var newRow = `
-                //         <tr>
-                //             <th scope="row">${response.iteration}</th>
-                //             <td>${response.data.judul_buku}</td>
-                //             <td>${response.data.name}</td>
-                //             <td>${response.data.nama}</td>
-                //             <td>${response.data.kategori}</td>
-                //             <td>${response.data.thn_terbit}</td>
-                //             <td>
-                //                  <button type="button" class="btn btn-success"><i
-                //                     class="bi bi-pencil-square"></i></button>
-                //                 <button type="button" class="btn btn-warning"><i
-                //                     class="bi bi-info-circle"></i></button>
-                //                 <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                //             </td>
-                //         </tr>
-                // `;
-                        //     $('tbody').append(newRow);
-                        //     $('#tambahBuku')[0].reset();
                     },
                     error: function(xhr) {
                         var errors = xhr.responseJSON.errors;
@@ -196,6 +180,70 @@
                             text: 'Buku Gagal Ditambahkan!',
                             icon: 'error',
                             confirmButtonText: 'Oke'
+                        });
+                    }
+                });
+            });
+
+            $('.modalDetailBuku').on('click', function(e) {
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: '{{ url('modal-detail-buku') }}/' + id,
+                    method: 'GET',
+                    success: function(response) {
+                        $('#modalDetailBuku').html(response);
+                        $('#detailBuku').modal('show');
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Gagal memuat modal!',
+                            icon: 'error',
+                            confirmButtonText: 'Oke'
+                        });
+                    }
+                });
+            });
+
+            $('.deleteBtn').on('click', function(e) {
+                e.preventDefault();
+
+                var id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Buku akan dihapus dan tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/hapus/' + id,
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Dihapus!',
+                                    'Buku berhasil dihapus.',
+                                    'success'
+                                );
+
+                                $('button[data-id="' + id + '"]').closest('tr').remove();
+                            },
+                            error: function(xhr) {
+                                Swal.fire(
+                                    'Error!',
+                                    'Buku gagal dihapus!',
+                                    'error'
+                                );
+                            }
                         });
                     }
                 });

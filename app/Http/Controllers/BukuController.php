@@ -113,4 +113,33 @@ class BukuController extends Controller
 
         return response()->json(['message' => 'Success']);
     }
+
+    public function detailBuku($id)
+    {
+        $detailBuku = BukuModel::join('users', 'buku.penulis_id', '=', 'users.id')
+            ->join('penerbit_buku', 'buku.penerbit_id', '=', 'penerbit_buku.id')
+            ->join('kategori_buku', 'buku.kategori_id', '=', 'kategori_buku.id')
+            ->where('buku.id',$id)
+            ->select('buku.*', 'users.name', 'penerbit_buku.nama', 'kategori_buku.kategori')
+            ->first();
+        $data = [
+            'detailBuku' => $detailBuku
+        ];
+
+        return view('buku.modal_detail_buku', $data);
+    }
+
+    public function hapusBuku($id)
+    {
+        $detailBuku = BukuModel::find($id);
+        $cover = $detailBuku->cover;
+
+        if ($cover) {
+            $path = public_path('image/cover/' . $cover);
+            unlink($path);
+        }
+        $detailBuku->delete();
+
+        return response()->json(['message' => 'Success']);
+    }
 }
