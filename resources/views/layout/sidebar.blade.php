@@ -23,6 +23,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/penulis') }}">
+                    <i class="bi bi-people"></i>
+                    <span>Data Penulis</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ url('/penerbit') }}">
                     <i class="bi bi-upload"></i>
                     <span>Data Penerbit</span>

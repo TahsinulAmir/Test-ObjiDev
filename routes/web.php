@@ -5,6 +5,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\PenulisController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,10 @@ Route::get('/update-kategori/{id}', [KategoriController::class, 'updateKategori'
 Route::post('/kategori', [KategoriController::class, 'tambahKategori']);
 Route::post('/update-kategori/{id}', [KategoriController::class, 'editKategori']);
 Route::post('/hapus-kategori/{id}', [KategoriController::class, 'hapusKategori']);
+
+Route::get('/penulis', [PenulisController::class, 'index']);
+Route::get('/update-penulis/{id}', [PenulisController::class, 'updatePenulis']);
+Route::get('/detail-penulis/{id}', [PenulisController::class, 'detailPenulis']);
+Route::post('/penulis', [PenulisController::class, 'tambahPenulis']);
+Route::post('/hapus-penulis/{id}', [PenulisController::class, 'hapusPenulis']);
+Route::post('/update-penulis/{id}', [PenulisController::class, 'editPenulis']);
