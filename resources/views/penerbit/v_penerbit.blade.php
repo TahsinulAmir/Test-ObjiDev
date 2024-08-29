@@ -224,7 +224,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/hapus/' + id,
+                            url: '/hapus-penerbit/' + id,
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}'

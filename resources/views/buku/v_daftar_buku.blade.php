@@ -246,7 +246,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/hapus/' + id,
+                            url: '/hapus-buku/' + id,
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}'

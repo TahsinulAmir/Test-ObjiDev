@@ -26,7 +26,7 @@ Route::get('/buku/{id}', [BukuController::class, 'editBuku']);
 Route::get('/modal-detail-buku/{id}', [BukuController::class, 'detailBuku']);
 Route::post('/tambah-buku', [BukuController::class, 'tambahBuku']);
 Route::post('/buku/{id}', [BukuController::class, 'updateBuku']);
-Route::post('/hapus/{id}', [BukuController::class, 'hapusBuku']);
+Route::post('/hapus-buku/{id}', [BukuController::class, 'hapusBuku']);
 Route::get('/laporan', [BukuController::class, 'laporan']);
 Route::post('/laporan', [BukuController::class, 'getLaporan']);
 
@@ -37,7 +37,7 @@ Route::get('/penerbit/{id}', [PenerbitController::class, 'detailPenerbit']);
 Route::get('/update-penerbit/{id}', [PenerbitController::class, 'updatePenerbit']);
 Route::post('/update-penerbit/{id}', [PenerbitController::class, 'editPenerbit']);
 Route::post('/penerbit', [PenerbitController::class, 'tambahPenerbit']);
-Route::post('/hapus/{id}', [PenerbitController::class, 'hapusPenerbit']);
+Route::post('/hapus-penerbit/{id}', [PenerbitController::class, 'hapusPenerbit']);
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/update-kategori/{id}', [KategoriController::class, 'updateKategori']);
