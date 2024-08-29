@@ -76,8 +76,8 @@
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="password" required>
+                                            <input type="password" name="password" class="form-control" id="password"
+                                                required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
 
@@ -110,7 +110,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   <script>
+    <script>
         $('#prosesLogin').on('submit', function(e) {
             e.preventDefault();
             var email = $('#email').val();
@@ -129,11 +129,8 @@
                         title: "Berhasil!",
                         text: "Login Berhasil!",
                         icon: "success"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = '/dashboard';
-                        }
-                    });
+                    })
+                    window.location.href = '/dashboard';
                 },
                 error: function(xhr) {
                     Swal.fire({
