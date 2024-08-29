@@ -28,6 +28,7 @@ class BukuController extends Controller
             ->when($request->penerbit_id, function ($query) use ($request) {
                 return $query->where('penerbit_id', $request->penerbit_id);
             })
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $all_penulis = User::where('role', 'penulis')
@@ -209,6 +210,7 @@ class BukuController extends Controller
             ->join('kategori_buku', 'buku.kategori_id', '=', 'kategori_buku.id')
             ->where('buku.penulis_id', $id_penulis)
             ->select('buku.*', 'users.name', 'penerbit_buku.nama', 'kategori_buku.kategori')
+            ->orderBy('jumlah', 'asc')
             ->get();
 
         $data = [
